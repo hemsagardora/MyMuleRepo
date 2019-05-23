@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tls="http://www.mulesoft.org/schema/mule/tls" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="1da0b0a8-62e2-4713-97f9-7dcc6c4772b0" >
+		<http:listener-connection protocol="HTTPS" host="localhost" port="7575" >
+			<tls:context >
+				<tls:key-store path="keystore_server.jks" keyPassword="mule@hemsagar" password="mule@hemsagar" />
+			</tls:context>
+		</http:listener-connection>
+	</http:listener-config>
+	<flow name="https-demoFlow" doc:id="2936079f-5279-45c4-b6ba-aa089fcadec7" >
+		<http:listener doc:name="Listener" doc:id="3109d2ae-b55e-4a06-8655-d1ac796b4bcc" config-ref="HTTP_Listener_config" path="/testHttps"/>
+		<logger level="INFO" doc:name="Logger" doc:id="57d65344-1153-4e95-991f-d3555c485a01" message="Hello...."/>
+		<set-payload value="Hello" doc:name="Set Payload" doc:id="da232cb5-08b5-43ec-92ff-49b266dc9dd6" />
+	</flow>
+</mule>
